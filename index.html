@@ -38,16 +38,44 @@
         .obituary-header {
             text-align: center;
         }
-        .obituary-header img {
-            max-height: 400px;  /* limits the height */
-            width: auto;        /* keeps width proportional */
-            max-width: 100%;    /* ensures it shrinks on mobile */
-            display: block;
-            margin: 0 auto;     /* centers the image */
-            border-radius: 8px;
+
+        /* Image background container */
+        .image-background {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
+
+        /* Landscape behind the top half */
+        .landscape-strip {
+            background-image: url('landscape.jpg'); /* replace with actual landscape */
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 50%;        /* top half of the portrait */
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 12px 12px 0 0; /* rounded top corners */
+            z-index: 0;         /* behind portrait */
+        }
+
+        /* Portrait image on top */
+        .image-background img {
+            max-height: 400px;
+            width: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px; /* match container */
+            position: relative;
+            z-index: 1;          /* above landscape strip */
+        }
+
         h1 {
-            margin-top: 20px;
+            margin-top: 0;
             font-size: 2.2em;
         }
         h2 {
@@ -64,13 +92,26 @@
             font-size: 0.9em;
             color: #555;
         }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .image-background img {
+                max-height: 250px;
+            }
+            .landscape-strip {
+                height: 50%; /* keeps relative proportion */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="obituary-header">
-            <img src="junior-valentin.jpg" alt="Norberto 'Junior' Valentin">
-            <h1>Norberto “Junior” Valentin</h1>
+            <div class="image-background">
+                <div class="landscape-strip"></div>
+                <img src="junior-valentin.jpg" alt="Norberto 'Junior' Valentin">
+            </div>
+            <h1>Norberto “Junior” Valentin Obituary</h1>
             <h2>May 7, 1971 – September 1, 2025</h2>
         </div>
 
